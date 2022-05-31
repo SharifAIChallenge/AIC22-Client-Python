@@ -1,4 +1,4 @@
-from src.grpc_stubs.hide_and_seek_pb2 import GameView, MoveCommand, ChatCommand
+from hide_and_seek_pb2 import GameView, MoveCommand, ChatCommand
 
 
 def get_thief_starting_node(view: GameView) -> int:
@@ -24,3 +24,4 @@ def thief_chat_ai(view: GameView) -> ChatCommand:
 def police_chat_ai(view: GameView) -> ChatCommand:
     # TODO
     pass
+ipm-mxxi-ieo
