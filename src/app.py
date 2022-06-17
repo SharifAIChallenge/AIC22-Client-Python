@@ -4,11 +4,14 @@ import logging, grpc, yaml
 
 
 class GameClient:
-    def __init__(self, token, stub: GameHandlerStub, view: GameView):
-        pass
+    def __init__(self, token, stub: GameHandlerStub):
+        self.token = token
+        self.game_stub = stub
 
-    def handle_client(self, view: GameView):
-        pass
+    def handle_client(self):
+        for view in self.game_stub.Watch(token=self.token):
+            game_status = view.status
+
 
     def send_message(self, view: GameView):
         pass
@@ -24,7 +27,16 @@ class GameClient:
 
 
 def run():
-    pass
+    config = {}
+
+    with open("./config/application.yml", "r") as config_file:
+        config = yaml.load(config_file, Loader=yaml.FullLoader)
+
+    with grpc.insecure_channel(f"{config['grpc']['server']}:{config['grpc']['port']}") as channel:
+        game_stub = GameHandlerStub(channel)
+
+    client = GameClient(token=f"{config['grpc']['token']}", stub=game_stub)
+    client.handle_client()
 
 
 if __name__ == "__main__":
