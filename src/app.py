@@ -9,9 +9,32 @@ class GameClient:
         self.game_stub = stub
 
     def handle_client(self):
-        for view in self.game_stub.Watch(token=self.token):
-            game_status = view.status
+        index = 0
+        try:
+            for view in self.game_stub.Watch(token=self.token):
+                logging.info(view)
+                game_status = view.status
+                index += 1
+                if index == 1:
+                    print(self.token)
+                    try:
+                        self.game_stub.DeclareReadiness(self.get_game_command(view))
+                    except Exception as e:
+                        print(e)
+                    self.set_ai_method(view)
+                elif game_status == GameView.ONGOING:
+                    try:
+                        self.send_message(view)
+                        self.move(view)
+                    except Exception as e:
+                        print(e)
+                elif game_status == GameView.FINISHED:
+                    self.channel.unsubscribe(lambda _: None)
 
+        except Exception as e:
+            print(e)
+            self.channel.unsubscribe()
+            exit()
 
     def send_message(self, view: GameView):
         pass
