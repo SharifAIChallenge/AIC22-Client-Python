@@ -1,6 +1,7 @@
 from src.grpc_stubs.hide_and_seek_pb2 import GameView
 from src.grpc_stubs.hide_and_seek_pb2_grpc import GameHandlerStub
 import logging, grpc, yaml
+import client
 
 
 class GameClient:
@@ -9,14 +10,14 @@ class GameClient:
         self.game_stub = stub
 
     def handle_client(self):
-        index = 0
+        is_first_time = True
         try:
             for view in self.game_stub.Watch(token=self.token):
                 logging.info(view)
                 game_status = view.status
-                index += 1
-                if index == 1:
-                    print(self.token)
+
+                if is_first_time:
+                    is_first_time = False
                     try:
                         self.game_stub.DeclareReadiness(self.get_game_command(view))
                     except Exception as e:
@@ -36,14 +37,20 @@ class GameClient:
             self.channel.unsubscribe()
             exit()
 
-    def send_message(self, view: GameView):
-        pass
+    def send_message(self, message):
+        self.game_stub.SendMessage(message)
 
     def move(self, view: GameView):
         pass
 
     def set_ai_method(self, view: GameView):
-        pass
+
+        if view.viewer.agent.type.THIEF:
+            self.move_method = client.thief_move_ai
+            self.chat_method = client.thief_chat_ai
+        else:
+            self.move_method = client.police_move_ai
+            self.chat_method = client.police_chat_ai
 
     def get_game_command(self, view: GameView):
         pass
