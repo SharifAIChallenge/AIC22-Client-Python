@@ -1,5 +1,5 @@
-from src.client import GameClient
-from src.grpc_stubs.hide_and_seek_pb2 import GameView
+from client import GameClient
+from grpc_stubs.hide_and_seek_pb2 import GameView
 
 
 def get_thief_starting_node(view: GameView) -> int:

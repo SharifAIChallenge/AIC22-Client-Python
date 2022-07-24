@@ -1,11 +1,12 @@
+import sys
 import logging
 import traceback
 
 import grpc
 import yaml
 
-from src.grpc_stubs import hide_and_seek_pb2_grpc
-from src.grpc_stubs.hide_and_seek_pb2 import WatchCommand, GameStatus, TurnType, AgentType, MoveCommand, \
+from grpc_stubs import hide_and_seek_pb2_grpc
+from grpc_stubs.hide_and_seek_pb2 import WatchCommand, GameStatus, TurnType, AgentType, MoveCommand, \
     GameView, DeclareReadinessCommand, ChatCommand
 
 
@@ -82,14 +83,14 @@ class GameClient:
         player = view.viewer
         agent_type = player.type
         if agent_type == AgentType.THIEF:
-            from src import AI
+            import AI
             start_node_id = AI.get_thief_starting_node(view)
             return DeclareReadinessCommand(token=self.token, startNodeId=start_node_id)
         else:
             return DeclareReadinessCommand(token=self.token, startNodeId=1)
 
     def set_ai_methods(self, view: GameView) -> None:
-        from src.AI import AI,Phone
+        from AI import AI,Phone
         self.ai = AI(Phone(self))
         viewer_type = view.viewer.type
         if viewer_type == AgentType.THIEF:
@@ -98,14 +99,17 @@ class GameClient:
             self.ai_move_method = self.ai.police_move_ai
 
 
-def main():
+def main(token):
     with open("./config/application.yml", "r") as config_file:
         cfg = yaml.load(config_file, Loader=yaml.FullLoader)
     server_address = f"{cfg['grpc']['server']}:{cfg['grpc']['port']}"
-    token = cfg['grpc']['token']
     client = (GameClient(token=token, server_address=server_address))
     client.handle_client()
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        token = sys.argv[1]
+    except:
+        raise Exception("No token provided. Please provide a token as the first argument to the program.")
+    main(token)
