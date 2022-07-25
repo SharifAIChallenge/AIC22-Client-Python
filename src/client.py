@@ -3,10 +3,9 @@ import logging
 import traceback
 
 import grpc
-import yaml
 
-from grpc_stubs import hide_and_seek_pb2_grpc
-from grpc_stubs.hide_and_seek_pb2 import WatchCommand, GameStatus, TurnType, AgentType, MoveCommand, \
+from src import hide_and_seek_pb2_grpc
+from src.hide_and_seek_pb2 import WatchCommand, GameStatus, TurnType, AgentType, MoveCommand, \
     GameView, DeclareReadinessCommand, ChatCommand
 
 
@@ -18,6 +17,7 @@ class GameClient:
         self.server_address = server_address
         self.channel = grpc.insecure_channel(self.server_address)
         self.stub = hide_and_seek_pb2_grpc.GameHandlerStub(channel=self.channel)
+
         self.ai = ai
         self.token = token
         self.has_moved = False
@@ -36,7 +36,6 @@ class GameClient:
                 logging.info(view)
                 index += 1
                 if index == 1:
-                    print(self.token)
                     try:
                         self.stub.DeclareReadiness(self.get_join_game_command(view))
                     except Exception as e:
@@ -47,7 +46,7 @@ class GameClient:
         except Exception:
             print(traceback.format_exc())
             self.channel.unsubscribe(None)
-            exit()
+            exit(100)
 
     def check_and_end_the_game(self, view):
         if view.status == GameStatus.FINISHED:
@@ -83,14 +82,14 @@ class GameClient:
         player = view.viewer
         agent_type = player.type
         if agent_type == AgentType.THIEF:
-            import AI
-            start_node_id = AI.get_thief_starting_node(view)
+            import src.AI as ai
+            start_node_id = ai.get_thief_starting_node(view)
             return DeclareReadinessCommand(token=self.token, startNodeId=start_node_id)
         else:
             return DeclareReadinessCommand(token=self.token, startNodeId=1)
 
     def set_ai_methods(self, view: GameView) -> None:
-        from AI import AI,Phone
+        from src.AI import AI, Phone
         self.ai = AI(Phone(self))
         viewer_type = view.viewer.type
         if viewer_type == AgentType.THIEF:
@@ -100,9 +99,7 @@ class GameClient:
 
 
 def main(token):
-    with open("./config/application.yml", "r") as config_file:
-        cfg = yaml.load(config_file, Loader=yaml.FullLoader)
-    server_address = f"{cfg['grpc']['server']}:{cfg['grpc']['port']}"
+    server_address = '127.0.0.1:7000'
     client = (GameClient(token=token, server_address=server_address))
     client.handle_client()
 
