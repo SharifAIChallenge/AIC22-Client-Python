@@ -1,5 +1,5 @@
 from src.client import GameClient
-from src.hide_and_seek_pb2 import GameView
+from src.model import GameView
 
 
 def get_thief_starting_node(view: GameView) -> int:
@@ -21,7 +21,10 @@ class AI:
 
     def thief_move_ai(self, view: GameView) -> int:
         # write your code here
-        self.phone.send_message('010100101')
+        message = ''
+        for m in range(len(view.visible_agents)):
+            message = message  + '0'
+        self.phone.send_message(message)
         return 2
 
     def police_move_ai(self, view: GameView) -> int:

@@ -5,6 +5,7 @@ import traceback
 import grpc
 
 from src import hide_and_seek_pb2_grpc
+from src import model
 from src.hide_and_seek_pb2 import WatchCommand, GameStatus, TurnType, AgentType, MoveCommand, \
     GameView, DeclareReadinessCommand, ChatCommand
 
@@ -62,7 +63,7 @@ class GameClient:
         return False
 
     def move(self, view):
-        node_id = self.ai_move_method(view)
+        node_id = self.ai_move_method(model.GameView.to_model(view))
         move_command = MoveCommand(token=self.token, toNodeId=node_id)
         if move_command:
             try:
@@ -83,7 +84,7 @@ class GameClient:
         agent_type = player.type
         if agent_type == AgentType.THIEF:
             import src.AI as ai
-            start_node_id = ai.get_thief_starting_node(view)
+            start_node_id = ai.get_thief_starting_node(model.GameView.to_model(view))
             return DeclareReadinessCommand(token=self.token, startNodeId=start_node_id)
         else:
             return DeclareReadinessCommand(token=self.token, startNodeId=1)
