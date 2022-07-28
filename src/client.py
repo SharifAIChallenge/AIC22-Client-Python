@@ -36,6 +36,12 @@ class GameClient:
                     self.has_moved = False
                 logging.info(view)
                 index += 1
+                if view.status == GameStatus.FINISHED:
+                    self.channel.unsubscribe(None)
+                    return
+                if view.viewer.is_dead:
+                    self.channel.unsubscribe(None)
+                    return
                 if index == 1:
                     try:
                         self.stub.DeclareReadiness(self.get_join_game_command(view))
@@ -44,10 +50,12 @@ class GameClient:
                     self.set_ai_methods(view)
                 elif self.check_if_is_client_turn_to_move(view):
                     self.move(view)
-        except Exception:
+
+
+        except Exception as e:
             print(traceback.format_exc())
             self.channel.unsubscribe(None)
-            exit(100)
+            raise e
 
     def check_and_end_the_game(self, view):
         if view.status == GameStatus.FINISHED:
