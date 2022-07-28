@@ -186,3 +186,6 @@ fabric.properties
 
 # binaries
 client
+
+#settings
+settings.json
