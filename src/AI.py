@@ -16,7 +16,7 @@ class Phone:
 
 
 class AI:
-    def __init__(self, phone: Phone):
+    def __init__(self, view: GameView, phone: Phone):
         self.phone = phone
 
     def thief_move_ai(self, view: GameView) -> int:

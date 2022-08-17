@@ -99,7 +99,7 @@ class GameClient:
 
     def set_ai_methods(self, view: GameView) -> None:
         from src.AI import AI, Phone
-        self.ai = AI(Phone(self))
+        self.ai = AI(view, Phone(self))
         viewer_type = view.viewer.type
         if viewer_type == AgentType.THIEF:
             self.ai_move_method = self.ai.thief_move_ai
