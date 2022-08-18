@@ -1,4 +1,6 @@
 import enum
+from typing import List
+
 from src import hide_and_seek_pb2
 
 
@@ -103,7 +105,7 @@ class Path:
 
 
 class Graph:
-    def __init__(self, paths: [], nodes: []):
+    def __init__(self, paths: List[Path], nodes: List[Node]):
         self.paths = paths
         self.nodes = nodes
 
@@ -125,7 +127,7 @@ class GameConfig:
                  police_income_each_turn: float,
                  thief_income_each_turn: float,
                  max_turn: int,
-                 visible_turns: [],
+                 visible_turns: List[int],
                  chat_box_max_size: int,
                  chat_cost_per_char: float):
         self.graph = graph
@@ -200,8 +202,8 @@ class GameView:
                  config: GameConfig,
                  viewer: Agent,
                  balance: float,
-                 visible_agents: list,
-                 chat_box: list):
+                 visible_agents: List[Agent],
+                 chat_box: List[Chat]):
         self.status = status
         self.result = result
         self.turn = turn
