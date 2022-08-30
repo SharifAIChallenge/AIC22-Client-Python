@@ -17,7 +17,7 @@ from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13hide_and_seek.proto\x12\"ir.sharif.aic.hideandseek.api.grpc\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"Z\n\x04Turn\x12\x12\n\nturnNumber\x18\x01 \x01(\x05\x12>\n\x08turnType\x18\x02 \x01(\x0e\x32,.ir.sharif.aic.hideandseek.api.grpc.TurnType\"\xaa\x01\n\x05\x41gent\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x36\n\x04team\x18\x02 \x01(\x0e\x32(.ir.sharif.aic.hideandseek.api.grpc.Team\x12;\n\x04type\x18\x03 \x01(\x0e\x32-.ir.sharif.aic.hideandseek.api.grpc.AgentType\x12\x0f\n\x07node_id\x18\x04 \x01(\x05\x12\x0f\n\x07is_dead\x18\x05 \x01(\x08\"\x12\n\x04Node\x12\n\n\x02id\x18\x01 \x01(\x05\"P\n\x04Path\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x15\n\rfirst_node_id\x18\x02 \x01(\x05\x12\x16\n\x0esecond_node_id\x18\x03 \x01(\x05\x12\r\n\x05price\x18\x04 \x01(\x01\"y\n\x05Graph\x12\x37\n\x05paths\x18\x01 \x03(\x0b\x32(.ir.sharif.aic.hideandseek.api.grpc.Path\x12\x37\n\x05nodes\x18\x02 \x03(\x0b\x32(.ir.sharif.aic.hideandseek.api.grpc.Node\"M\n\x0eIncomeSettings\x12\x1c\n\x14policeIncomeEachTurn\x18\x01 \x01(\x01\x12\x1d\n\x15thievesIncomeEachTurn\x18\x02 \x01(\x01\"6\n\x0cTurnSettings\x12\x10\n\x08maxTurns\x18\x01 \x01(\x05\x12\x14\n\x0cvisibleTurns\x18\x02 \x03(\x05\"D\n\x0c\x43hatSettings\x12\x16\n\x0e\x63hatBoxMaxSize\x18\x01 \x01(\x05\x12\x1c\n\x14\x63hatCostPerCharacter\x18\x02 \x01(\x01\"\xa2\x02\n\nGameConfig\x12\x38\n\x05graph\x18\x01 \x01(\x0b\x32).ir.sharif.aic.hideandseek.api.grpc.Graph\x12J\n\x0eincomeSettings\x18\x02 \x01(\x0b\x32\x32.ir.sharif.aic.hideandseek.api.grpc.IncomeSettings\x12\x46\n\x0cturnSettings\x18\x03 \x01(\x0b\x32\x30.ir.sharif.aic.hideandseek.api.grpc.TurnSettings\x12\x46\n\x0c\x63hatSettings\x18\x04 \x01(\x0b\x32\x30.ir.sharif.aic.hideandseek.api.grpc.ChatSettings\"=\n\x17\x44\x65\x63lareReadinessCommand\x12\r\n\x05token\x18\x01 \x01(\t\x12\x13\n\x0bstartNodeId\x18\x02 \x01(\x05\".\n\x0bMoveCommand\x12\r\n\x05token\x18\x01 \x01(\t\x12\x10\n\x08toNodeId\x18\x02 \x01(\x05\"\x1d\n\x0cWatchCommand\x12\r\n\x05token\x18\x01 \x01(\t\"\xcc\x03\n\x08GameView\x12>\n\x06status\x18\x01 \x01(\x0e\x32..ir.sharif.aic.hideandseek.api.grpc.GameStatus\x12>\n\x06result\x18\x02 \x01(\x0e\x32..ir.sharif.aic.hideandseek.api.grpc.GameResult\x12\x36\n\x04turn\x18\x03 \x01(\x0b\x32(.ir.sharif.aic.hideandseek.api.grpc.Turn\x12>\n\x06\x63onfig\x18\x04 \x01(\x0b\x32..ir.sharif.aic.hideandseek.api.grpc.GameConfig\x12\x39\n\x06viewer\x18\x05 \x01(\x0b\x32).ir.sharif.aic.hideandseek.api.grpc.Agent\x12\x0f\n\x07\x62\x61lance\x18\x06 \x01(\x01\x12\x41\n\x0evisible_agents\x18\x07 \x03(\x0b\x32).ir.sharif.aic.hideandseek.api.grpc.Agent\x12\x39\n\x07\x63hatBox\x18\x08 \x03(\x0b\x32(.ir.sharif.aic.hideandseek.api.grpc.Chat\"*\n\x0b\x43hatCommand\x12\r\n\x05token\x18\x01 \x01(\t\x12\x0c\n\x04text\x18\x02 \x01(\t\"d\n\x04\x43hat\x12\n\n\x02id\x18\x01 \x01(\t\x12\x13\n\x0b\x66romAgentId\x18\x02 \x01(\x05\x12\x0c\n\x04text\x18\x03 \x01(\t\x12-\n\ttimeStamp\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp*\x1d\n\x04Team\x12\t\n\x05\x46IRST\x10\x00\x12\n\n\x06SECOND\x10\x01*+\n\x08TurnType\x12\x0e\n\nTHIEF_TURN\x10\x00\x12\x0f\n\x0bPOLICE_TURN\x10\x01*\"\n\tAgentType\x12\t\n\x05THIEF\x10\x00\x12\n\n\x06POLICE\x10\x01*4\n\nGameStatus\x12\x0b\n\x07PENDING\x10\x00\x12\x0b\n\x07ONGOING\x10\x01\x12\x0c\n\x08\x46INISHED\x10\x02*C\n\nGameResult\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0e\n\nFIRST_WINS\x10\x01\x12\x0f\n\x0bSECOND_WINS\x10\x02\x12\x07\n\x03TIE\x10\x03\x32\x8a\x03\n\x0bGameHandler\x12g\n\x10\x44\x65\x63lareReadiness\x12;.ir.sharif.aic.hideandseek.api.grpc.DeclareReadinessCommand\x1a\x16.google.protobuf.Empty\x12i\n\x05Watch\x12\x30.ir.sharif.aic.hideandseek.api.grpc.WatchCommand\x1a,.ir.sharif.aic.hideandseek.api.grpc.GameView0\x01\x12O\n\x04Move\x12/.ir.sharif.aic.hideandseek.api.grpc.MoveCommand\x1a\x16.google.protobuf.Empty\x12V\n\x0bSendMessage\x12/.ir.sharif.aic.hideandseek.api.grpc.ChatCommand\x1a\x16.google.protobuf.Emptyb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13hide_and_seek.proto\x12\"ir.sharif.aic.hideandseek.api.grpc\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"Z\n\x04Turn\x12\x12\n\nturnNumber\x18\x01 \x01(\x05\x12>\n\x08turnType\x18\x02 \x01(\x0e\x32,.ir.sharif.aic.hideandseek.api.grpc.TurnType\"\xaa\x01\n\x05\x41gent\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x36\n\x04team\x18\x02 \x01(\x0e\x32(.ir.sharif.aic.hideandseek.api.grpc.Team\x12;\n\x04type\x18\x03 \x01(\x0e\x32-.ir.sharif.aic.hideandseek.api.grpc.AgentType\x12\x0f\n\x07node_id\x18\x04 \x01(\x05\x12\x0f\n\x07is_dead\x18\x05 \x01(\x08\"\x12\n\x04Node\x12\n\n\x02id\x18\x01 \x01(\x05\"P\n\x04Path\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x15\n\rfirst_node_id\x18\x02 \x01(\x05\x12\x16\n\x0esecond_node_id\x18\x03 \x01(\x05\x12\r\n\x05price\x18\x04 \x01(\x01\"\xe2\x01\n\x05Graph\x12\x37\n\x05paths\x18\x01 \x03(\x0b\x32(.ir.sharif.aic.hideandseek.api.grpc.Path\x12\x37\n\x05nodes\x18\x02 \x03(\x0b\x32(.ir.sharif.aic.hideandseek.api.grpc.Node\x12!\n\x19visibleRadiusXPoliceThief\x18\x03 \x01(\x05\x12!\n\x19visibleRadiusYPoliceJoker\x18\x04 \x01(\x05\x12!\n\x19visibleRadiusZThiefBatman\x18\x05 \x01(\x05\"M\n\x0eIncomeSettings\x12\x1c\n\x14policeIncomeEachTurn\x18\x01 \x01(\x01\x12\x1d\n\x15thievesIncomeEachTurn\x18\x02 \x01(\x01\"6\n\x0cTurnSettings\x12\x10\n\x08maxTurns\x18\x01 \x01(\x05\x12\x14\n\x0cvisibleTurns\x18\x02 \x03(\x05\"D\n\x0c\x43hatSettings\x12\x16\n\x0e\x63hatBoxMaxSize\x18\x01 \x01(\x05\x12\x1c\n\x14\x63hatCostPerCharacter\x18\x02 \x01(\x01\"\xa2\x02\n\nGameConfig\x12\x38\n\x05graph\x18\x01 \x01(\x0b\x32).ir.sharif.aic.hideandseek.api.grpc.Graph\x12J\n\x0eincomeSettings\x18\x02 \x01(\x0b\x32\x32.ir.sharif.aic.hideandseek.api.grpc.IncomeSettings\x12\x46\n\x0cturnSettings\x18\x03 \x01(\x0b\x32\x30.ir.sharif.aic.hideandseek.api.grpc.TurnSettings\x12\x46\n\x0c\x63hatSettings\x18\x04 \x01(\x0b\x32\x30.ir.sharif.aic.hideandseek.api.grpc.ChatSettings\"=\n\x17\x44\x65\x63lareReadinessCommand\x12\r\n\x05token\x18\x01 \x01(\t\x12\x13\n\x0bstartNodeId\x18\x02 \x01(\x05\".\n\x0bMoveCommand\x12\r\n\x05token\x18\x01 \x01(\t\x12\x10\n\x08toNodeId\x18\x02 \x01(\x05\"\x1d\n\x0cWatchCommand\x12\r\n\x05token\x18\x01 \x01(\t\"\xcc\x03\n\x08GameView\x12>\n\x06status\x18\x01 \x01(\x0e\x32..ir.sharif.aic.hideandseek.api.grpc.GameStatus\x12>\n\x06result\x18\x02 \x01(\x0e\x32..ir.sharif.aic.hideandseek.api.grpc.GameResult\x12\x36\n\x04turn\x18\x03 \x01(\x0b\x32(.ir.sharif.aic.hideandseek.api.grpc.Turn\x12>\n\x06\x63onfig\x18\x04 \x01(\x0b\x32..ir.sharif.aic.hideandseek.api.grpc.GameConfig\x12\x39\n\x06viewer\x18\x05 \x01(\x0b\x32).ir.sharif.aic.hideandseek.api.grpc.Agent\x12\x0f\n\x07\x62\x61lance\x18\x06 \x01(\x01\x12\x41\n\x0evisible_agents\x18\x07 \x03(\x0b\x32).ir.sharif.aic.hideandseek.api.grpc.Agent\x12\x39\n\x07\x63hatBox\x18\x08 \x03(\x0b\x32(.ir.sharif.aic.hideandseek.api.grpc.Chat\"*\n\x0b\x43hatCommand\x12\r\n\x05token\x18\x01 \x01(\t\x12\x0c\n\x04text\x18\x02 \x01(\t\"d\n\x04\x43hat\x12\n\n\x02id\x18\x01 \x01(\t\x12\x13\n\x0b\x66romAgentId\x18\x02 \x01(\x05\x12\x0c\n\x04text\x18\x03 \x01(\t\x12-\n\ttimeStamp\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp*\x1d\n\x04Team\x12\t\n\x05\x46IRST\x10\x00\x12\n\n\x06SECOND\x10\x01*+\n\x08TurnType\x12\x0e\n\nTHIEF_TURN\x10\x00\x12\x0f\n\x0bPOLICE_TURN\x10\x01*9\n\tAgentType\x12\t\n\x05THIEF\x10\x00\x12\n\n\x06POLICE\x10\x01\x12\t\n\x05JOKER\x10\x02\x12\n\n\x06\x42\x41TMAN\x10\x03*4\n\nGameStatus\x12\x0b\n\x07PENDING\x10\x00\x12\x0b\n\x07ONGOING\x10\x01\x12\x0c\n\x08\x46INISHED\x10\x02*C\n\nGameResult\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0e\n\nFIRST_WINS\x10\x01\x12\x0f\n\x0bSECOND_WINS\x10\x02\x12\x07\n\x03TIE\x10\x03\x32\x8a\x03\n\x0bGameHandler\x12g\n\x10\x44\x65\x63lareReadiness\x12;.ir.sharif.aic.hideandseek.api.grpc.DeclareReadinessCommand\x1a\x16.google.protobuf.Empty\x12i\n\x05Watch\x12\x30.ir.sharif.aic.hideandseek.api.grpc.WatchCommand\x1a,.ir.sharif.aic.hideandseek.api.grpc.GameView0\x01\x12O\n\x04Move\x12/.ir.sharif.aic.hideandseek.api.grpc.MoveCommand\x1a\x16.google.protobuf.Empty\x12V\n\x0bSendMessage\x12/.ir.sharif.aic.hideandseek.api.grpc.ChatCommand\x1a\x16.google.protobuf.Emptyb\x06proto3')
 
 _TEAM = DESCRIPTOR.enum_types_by_name['Team']
 Team = enum_type_wrapper.EnumTypeWrapper(_TEAM)
@@ -35,6 +35,8 @@ THIEF_TURN = 0
 POLICE_TURN = 1
 THIEF = 0
 POLICE = 1
+JOKER = 2
+BATMAN = 3
 PENDING = 0
 ONGOING = 1
 FINISHED = 2
@@ -168,16 +170,16 @@ _GAMEHANDLER = DESCRIPTOR.services_by_name['GameHandler']
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _TEAM._serialized_start=1860
-  _TEAM._serialized_end=1889
-  _TURNTYPE._serialized_start=1891
-  _TURNTYPE._serialized_end=1934
-  _AGENTTYPE._serialized_start=1936
-  _AGENTTYPE._serialized_end=1970
-  _GAMESTATUS._serialized_start=1972
-  _GAMESTATUS._serialized_end=2024
-  _GAMERESULT._serialized_start=2026
-  _GAMERESULT._serialized_end=2093
+  _TEAM._serialized_start=1966
+  _TEAM._serialized_end=1995
+  _TURNTYPE._serialized_start=1997
+  _TURNTYPE._serialized_end=2040
+  _AGENTTYPE._serialized_start=2042
+  _AGENTTYPE._serialized_end=2099
+  _GAMESTATUS._serialized_start=2101
+  _GAMESTATUS._serialized_end=2153
+  _GAMERESULT._serialized_start=2155
+  _GAMERESULT._serialized_end=2222
   _TURN._serialized_start=121
   _TURN._serialized_end=211
   _AGENT._serialized_start=214
@@ -186,28 +188,28 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _NODE._serialized_end=404
   _PATH._serialized_start=406
   _PATH._serialized_end=486
-  _GRAPH._serialized_start=488
-  _GRAPH._serialized_end=609
-  _INCOMESETTINGS._serialized_start=611
-  _INCOMESETTINGS._serialized_end=688
-  _TURNSETTINGS._serialized_start=690
-  _TURNSETTINGS._serialized_end=744
-  _CHATSETTINGS._serialized_start=746
-  _CHATSETTINGS._serialized_end=814
-  _GAMECONFIG._serialized_start=817
-  _GAMECONFIG._serialized_end=1107
-  _DECLAREREADINESSCOMMAND._serialized_start=1109
-  _DECLAREREADINESSCOMMAND._serialized_end=1170
-  _MOVECOMMAND._serialized_start=1172
-  _MOVECOMMAND._serialized_end=1218
-  _WATCHCOMMAND._serialized_start=1220
-  _WATCHCOMMAND._serialized_end=1249
-  _GAMEVIEW._serialized_start=1252
-  _GAMEVIEW._serialized_end=1712
-  _CHATCOMMAND._serialized_start=1714
-  _CHATCOMMAND._serialized_end=1756
-  _CHAT._serialized_start=1758
-  _CHAT._serialized_end=1858
-  _GAMEHANDLER._serialized_start=2096
-  _GAMEHANDLER._serialized_end=2490
+  _GRAPH._serialized_start=489
+  _GRAPH._serialized_end=715
+  _INCOMESETTINGS._serialized_start=717
+  _INCOMESETTINGS._serialized_end=794
+  _TURNSETTINGS._serialized_start=796
+  _TURNSETTINGS._serialized_end=850
+  _CHATSETTINGS._serialized_start=852
+  _CHATSETTINGS._serialized_end=920
+  _GAMECONFIG._serialized_start=923
+  _GAMECONFIG._serialized_end=1213
+  _DECLAREREADINESSCOMMAND._serialized_start=1215
+  _DECLAREREADINESSCOMMAND._serialized_end=1276
+  _MOVECOMMAND._serialized_start=1278
+  _MOVECOMMAND._serialized_end=1324
+  _WATCHCOMMAND._serialized_start=1326
+  _WATCHCOMMAND._serialized_end=1355
+  _GAMEVIEW._serialized_start=1358
+  _GAMEVIEW._serialized_end=1818
+  _CHATCOMMAND._serialized_start=1820
+  _CHATCOMMAND._serialized_end=1862
+  _CHAT._serialized_start=1864
+  _CHAT._serialized_end=1964
+  _GAMEHANDLER._serialized_start=2225
+  _GAMEHANDLER._serialized_end=2619
 # @@protoc_insertion_point(module_scope)

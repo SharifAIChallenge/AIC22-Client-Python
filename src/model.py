@@ -103,9 +103,13 @@ class Path:
 
 
 class Graph:
-    def __init__(self, paths: [], nodes: []):
+    def __init__(self, paths: [], nodes: [], visible_radius_x_police_thief: int, visible_radius_y_police_joker: int,
+                 visible_radius_z_thief_batman: int):
         self.paths = paths
         self.nodes = nodes
+        self.visible_radius_x_police_thief = visible_radius_x_police_thief
+        self.visible_radius_y_police_joker = visible_radius_y_police_joker
+        self.visible_radius_z_thief_batman = visible_radius_z_thief_batman
 
     @staticmethod
     def to_model(graph: hide_and_seek_pb2.Graph):
@@ -117,7 +121,11 @@ class Graph:
         for n in graph.nodes:
             nodes.append(Node.to_model(n))
 
-        return Graph(paths=paths, nodes=nodes)
+        return Graph(paths=paths,
+                     nodes=nodes,
+                     visible_radius_x_police_thief=graph.visibleRadiusXPoliceThief,
+                     visible_radius_y_police_joker=graph.visibleRadiusYPoliceJoker,
+                     visible_radius_z_thief_batman=graph.visibleRadiusZThiefBatman)
 
 
 class GameConfig:

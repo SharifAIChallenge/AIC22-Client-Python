@@ -3,7 +3,7 @@
 import grpc
 
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
-import src.hide_and_seek_pb2 as hide__and__seek__pb2
+import hide_and_seek_pb2 as hide__and__seek__pb2
 
 
 class GameHandlerStub(object):
