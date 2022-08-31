@@ -169,11 +169,17 @@ class Team(enum.Enum):
 class AgentType(enum.Enum):
     THIEF = hide_and_seek_pb2.AgentType.THIEF
     POLICE = hide_and_seek_pb2.AgentType.POLICE
+    BATMAN = hide_and_seek_pb2.AgentType.BATMAN
+    JOKER = hide_and_seek_pb2.AgentType.JOKER
 
     @staticmethod
     def to_model(agent_type: hide_and_seek_pb2.AgentType):
         if agent_type == hide_and_seek_pb2.AgentType.THIEF:
             return AgentType.THIEF
+        if agent_type == hide_and_seek_pb2.AgentType.JOKER:
+            return AgentType.JOKER
+        if agent_type == hide_and_seek_pb2.AgentType.BATMAN:
+            return AgentType.BATMAN
         return AgentType.POLICE
 
 

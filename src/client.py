@@ -67,6 +67,10 @@ class GameClient:
                 return True
             if view.turn.turnType == TurnType.POLICE_TURN and view.viewer.type == AgentType.POLICE:
                 return True
+            if view.turn.turnType == TurnType.THIEF_TURN and view.viewer.type == AgentType.JOKER:
+                return True
+            if view.turn.turnType == TurnType.POLICE_TURN and view.viewer.type == AgentType.BATMAN:
+                return True
             return False
         return False
 
@@ -90,7 +94,7 @@ class GameClient:
     def get_join_game_command(self, view: GameView) -> DeclareReadinessCommand:
         player = view.viewer
         agent_type = player.type
-        if agent_type == AgentType.THIEF:
+        if agent_type == AgentType.THIEF or agent_type == AgentType.JOKER:
             import src.AI as ai
             start_node_id = ai.get_thief_starting_node(model.GameView.to_model(view))
             return DeclareReadinessCommand(token=self.token, startNodeId=start_node_id)
@@ -103,6 +107,10 @@ class GameClient:
         viewer_type = view.viewer.type
         if viewer_type == AgentType.THIEF:
             self.ai_move_method = self.ai.thief_move_ai
+        elif viewer_type == AgentType.JOKER:
+            self.ai_move_method = self.ai.thief_move_ai
+        elif viewer_type == AgentType.BATMAN:
+            self.ai_move_method = self.ai.police_move_ai
         else:
             self.ai_move_method = self.ai.police_move_ai
 
